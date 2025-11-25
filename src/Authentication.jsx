@@ -5,30 +5,38 @@ function Authentication() {
     const [newUser, setNewUser] = useState({ email: "", password: "" })
     const [isRegister, setIsRegister] = useState(false)
     function handleChange(e) {
-        setNewUser(prev => ({...prev, [e.target.name]: e.target.value}))
+        setNewUser(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
-    async function handleSubmit(e){
+    async function handleSubmit(e) {
         e.preventDefault()
-        if(!newUser.email || !newUser.password) return
+        if (!newUser.email || !newUser.password) return
 
-        if(isRegister){
-            const {error: registerError} = await supabase.auth.signUp(newUser)
-            if(registerError){
+        if (isRegister) {
+            const { error: registerError } = await supabase.auth.signUp(newUser)
+            if (registerError) {
                 console.error("Error registering:", registerError.message)
                 return
             }
+            else {
+                alert("A verification email is sent to you!")
+                setIsRegister(false)
+            }
         }
-        else{
-            const {error: loginError} = await supabase.auth.signInWithPassword(newUser)
-            if(loginError){
+        else {
+            const { error: loginError } = await supabase.auth.signInWithPassword(newUser)
+            if (loginError) {
                 console.error("Error login:", loginError.message)
+                alert("Verify error: Email not confirmed")
+            }
+            else {
+                alert("Logged-in successfully!")
             }
         }
     }
-    
+
     return (
-        <div className="w-100 border border-gray-500 hover:border-purple-500 mb-10 p-5">
+        <div className="w-full max-w-100 border border-gray-500 hover:border-purple-500 mb-10 p-5">
             <form onSubmit={handleSubmit} action="">
                 <input value={newUser?.email} onChange={handleChange} name="email" type="email" className='mb-2 border border-gray-500 bg-[#333] w-full outline-none focus:border-purple-500 py-1 px-3' placeholder='Email' />
                 <input value={newUser?.password} onChange={handleChange} name="password" type="password" className='mb-2 border border-gray-500 bg-[#333] w-full outline-none focus:border-purple-500 py-1 px-3' placeholder='Password' />

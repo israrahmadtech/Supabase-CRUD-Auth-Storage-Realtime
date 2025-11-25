@@ -128,11 +128,10 @@ function TaskManager({ session }) {
         </form>
       </div>
       <div className="mt-5 flex flex-col items-center">
-        <button onClick={fetchTasks} className='mb-2 bg-black py-2 px-4 rounded-xl font-semibold cursor-pointer border border-transparent hover:border-purple-500 transition'>Refresh Tasks</button>
         <div className="flex flex-wrap gap-5 justify-center">
           {
             allTasks?.map(task => (
-              <div key={task?.id} className="w-100 border border-gray-500 p-5 hover:border-purple-500">
+              <div key={task?.id} className="w-full max-w-100 border border-gray-500 p-5 hover:border-purple-500">
                 <h3 className='font-semibold text-lg'>{task?.id}</h3>
                 <h3 className='font-semibold text-lg'>{task?.title}</h3>
                 <p className='text-gray-300'>{task?.description}</p>
