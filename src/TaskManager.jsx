@@ -16,6 +16,7 @@ function TaskManager({ session }) {
       const { data, error } = await supabase
         .from('tasks')                                // which table?
         .select('*')                                  // which column?
+        .eq("email", session.user.email)
         .order('created_at', { ascending: true })     // formatting/sorting
       if (error) {
         console.error("Error while adding task: ", error.message);
@@ -88,6 +89,9 @@ function TaskManager({ session }) {
     setNewTask(task)
     setIsUpdating(true)
   }
+
+  console.log(allTasks);
+  
 
   // Save New Task
   async function saveNewTask(imageUrl) {
