@@ -36,7 +36,6 @@ function TaskManager({ session }) {
   useEffect(() => {
     const channel = supabase.channel("tasks-channel")
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'tasks' }, payload => {
-        console.log('New Task:', payload.new)
         setAllTasks(prev => [...prev, payload.new])
       })
       .subscribe()
@@ -68,7 +67,7 @@ function TaskManager({ session }) {
     const { error } = await supabase.storage.from('tasks-images').upload(imagePath, image)
 
     if (error) {
-      console.log("Error uploading image:", error.message)
+      ("Error uploading image:", error.message)
       return null
     }
 
@@ -89,9 +88,6 @@ function TaskManager({ session }) {
     setNewTask(task)
     setIsUpdating(true)
   }
-
-  console.log(allTasks);
-  
 
   // Save New Task
   async function saveNewTask(imageUrl) {
