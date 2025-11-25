@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import Authentication from "./authentication"
+import Authentication from "./Authentication"
 import TaskManager from "./TaskManager"
 import { supabase } from "./supabase-client"
 
