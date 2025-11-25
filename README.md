@@ -1,16 +1,22 @@
-## 🔐 Authentication (Auth)
+🔐 Authentication (Auth)
+
 supabase.auth.signUp()
 User ko email + password ke sath register krta hai.
+
 supabase.auth.signInWithPassword()
-Registered user ko login krta hai (email + password)
+Registered user ko login krta hai (email + password).
+
 supabase.auth.getSession()
 Currently logged-in user ki active session return krta hai.
-supabase.auth.onAuthStateChange()
-Login/logout/signup events ko realtime me sunta hai.
-session.user
-Logged-in user ka object jisme email, id waghera hota hai.
 
-## 🗄️ Database (CRUD)
+supabase.auth.onAuthStateChange()
+Login, logout, signup waghera ko realtime me sunta hai.
+
+session.user
+Logged-in user ka object (email, id waghera).
+
+🗄️ Database (CRUD)
+
 supabase.from('table')
 Kis table me CRUD operation perform krna hai.
 
@@ -30,45 +36,52 @@ Existing row update krta hai.
 Row delete krta hai.
 
 .eq('column', value)
-WHERE condition lagane ke liye (exact match).
+WHERE condition (exact match) lagata hai.
 
 .maybeSingle()
-Insert/update ke baad single row return krne ki koshish krta hai, warna null.
+Insert/update ke baad single row return krne ki koshish krta hai.
 
-## 🖼️ Storage (Images, Files)
+🖼️ Storage (Images, Files)
+
 supabase.storage.from('bucket')
-Konse bucket me file upload ya download krni hai.
+Kis bucket me file upload/download krni hai.
 
 .upload(path, file)
-Storage bucket me file upload krta hai.
+Bucket me file upload krta hai.
 
 .getPublicUrl(path)
-Uploaded file ka public URL return krta hai jise React component me directly use kr sakte ho.
+Uploaded file ka public URL deta hai (React me direct use hota hai).
 
-## 🔄 Realtime Subscriptions
+🔄 Realtime Subscriptions
+
 supabase.channel('channel-name')
-Realtime channel create krne ke liye.
+Realtime channel create krta hai.
 
 .on('postgres_changes', filter, callback)
-Database ke kuch events ko listen krta hai.
-Filter me pass hota hai:
+Database changes ko listen krta hai.
+Filter:
+
 event: 'INSERT' | 'UPDATE' | 'DELETE'
+
 schema: 'public'
+
 table: 'your_table_name'
 
 supabase.removeChannel(channel)
-Realtime listener ko cleanup krne ke liye.
+Listener ko cleanup krne ke liye.
 
-## 🧰 Useful React Patterns (Supabase Projects me use hotay hain)
+🧰 Useful React Patterns (Supabase Projects me use hotay hain)
+
 useEffect()
-Initial fetch + listeners add krne ke liye.
+Initial fetch + event listeners add krne ke liye.
 
 useState()
 Form data, session, tasks waghera ko manage krne ke liye.
 
-## 🎯 CRUD Flow Summary
+🎯 CRUD Flow Summary
+
 1. Create
-insert() + image upload (optional)
+insert() + (optional image upload)
 
 2. Read
 select() + order()
@@ -82,7 +95,8 @@ delete() + eq(id)
 5. Realtime
 .on('postgres_changes') to auto-update UI.
 
-## 🧩 Authentication Flow Summary
+🧩 Authentication Flow Summary
+
 1. Register
 auth.signUp()
 
@@ -95,7 +109,8 @@ auth.getSession()
 4. Listen for Auth Events
 auth.onAuthStateChange()
 
-## ☁️ Storage Flow Summary
+☁️ Storage Flow Summary
+
 1. Upload File
 storage.from(bucket).upload(path, file)
 
