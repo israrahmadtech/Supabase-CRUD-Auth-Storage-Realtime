@@ -26,7 +26,9 @@ function App() {
   }, [])
 
   async function handleLogout(){
-    await supabase.auth.signOut()
+    await supabase.auth.signOut({ scope: 'global' });
+    if (error) console.log("Logout Error:", error.message);
+    else alert("Logged out successfully");
   }
   return (
     <div className="p-10 w-full min-h-screen flex justify-center flex-col items-center bg-[#212121] text-white">
