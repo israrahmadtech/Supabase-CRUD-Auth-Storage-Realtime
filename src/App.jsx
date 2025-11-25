@@ -26,7 +26,7 @@ function App() {
   }, [])
 
   async function handleLogout(){
-    await supabase.auth.signOut({ scope: 'global' });
+    const {error} = await supabase.auth.signOut({ scope: 'global' });
     if (error) console.log("Logout Error:", error.message);
     else alert("Logged out successfully");
   }
